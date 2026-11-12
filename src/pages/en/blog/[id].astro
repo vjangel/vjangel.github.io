@@ -1,0 +1,14 @@
+---
+import EntryDetail from '../../../components/EntryDetail.astro';
+import { getLocalizedPaths, type LocalizedEntry } from '../../../lib/content';
+
+export function getStaticPaths() {
+  return getLocalizedPaths('posts', 'en');
+}
+
+interface Props {
+  item: LocalizedEntry<'posts'>;
+}
+---
+
+<EntryDetail locale="en" item={Astro.props.item} />

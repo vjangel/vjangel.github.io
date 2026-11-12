@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLocalizedCollection } from '../lib/content';
+import { copy, localizedPath, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const title = copy[locale].projects;
+const description = locale === 'en' ? 'Projects by VeiJay.' : 'VeiJay 的作品。';
+const projects = await getLocalizedCollection('projects', locale);
+---
+
+<BaseLayout {locale} {title} {description} path="/projects/" active="projects">
+  <section class="shell">
+    <header class="page-intro">
+      <h1 class="section-title">{title}</h1>
+    </header>
+    {projects.map(({ slug, entry, language }) => (
+      <a class="project-card" href={localizedPath(locale, `/projects/${slug}/`)}>
+        <img class="project-image" src={entry.data.image} alt="" />
+        <div class="project-copy" lang={language}>
+          <h2>{entry.data.title}</h2>
+          <p>{entry.data.description}</p>
+        </div>
+      </a>
+    ))}
+  </section>
+</BaseLayout>

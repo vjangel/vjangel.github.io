@@ -1,0 +1,35 @@
+---
+import type { Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const label = locale === 'en' ? 'Background animation' : '背景动效';
+---
+
+<button class="background-toggle" data-background-toggle type="button" aria-pressed="false" hidden>
+  <span class="motion-indicator" aria-hidden="true"></span>
+  <span>{label}</span>
+</button>
+
+<style>
+  .background-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: 2.75rem;
+    padding: .6rem .85rem;
+    color: #e8ecff;
+    background: rgb(20 26 56 / .9);
+    border: 1px solid rgb(195 217 255 / .36);
+    border-radius: .8rem;
+    font: inherit;
+    font-size: .78rem;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+  }
+  .background-toggle[hidden] { display: none; }
+  .background-toggle:hover { background: #29335e; }
+  .background-toggle:focus-visible { outline: 2px solid #a8f0ff; outline-offset: 4px; }
+  .motion-indicator { width: .55rem; height: .55rem; flex-shrink: 0; border-radius: 50%; background: #68728d; }
+  [aria-pressed="true"] .motion-indicator { background: #a2f4e8; box-shadow: 0 0 .65rem rgb(162 244 232 / .55); }
+</style>

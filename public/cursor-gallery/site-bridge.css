@@ -1,0 +1,19 @@
+.veijay-back {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  min-height: 44px;
+  flex-shrink: 0;
+  font-size: 22px;
+  color: var(--muted);
+  border-radius: 10px;
+}
+.veijay-back:hover { color: var(--accent); background: var(--accent-wash); }
+.download-notice { font-size: 13px; color: var(--muted); }
+.site-footer { flex-wrap: wrap; gap: 12px; }
+@media (max-width: 380px) {
+  .site-settings { gap: 3px; }
+  .brand { gap: 6px; font-size: 14px; }
+  .brand-mark { width: 30px; height: 34px; border-radius: 9px; }
+  .veijay-back { width: 28px; }
+}
