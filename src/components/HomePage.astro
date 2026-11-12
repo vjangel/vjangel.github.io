@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialLinks from './SocialLinks.astro';
+import { getLocalizedCollection } from '../lib/content';
+import { copy, localizedPath, type Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+
+const { locale } = Astro.props;
+const text = copy[locale];
+const [projects, posts] = await Promise.all([
+  getLocalizedCollection('projects', locale),
+  getLocalizedCollection('posts', locale),
+]);
+const featured = projects
+  .filter(({ entry }) => entry.data.featured)
+  .sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime())[0];
+const latest = posts.sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime()).slice(0, 3);
+const formatDate = new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' });
+---
+
+<BaseLayout active="home" {locale} path="/">
+  <div class="shell home-shell">
+    <section class="home-intro glass enter" aria-labelledby="home-title">
+      <div class="home-intro-copy">
+        <h1 id="home-title">Vei<span>Jay</span></h1>
+        <p class="intro-title">{text.title}</p>
+        <p class="intro-description">{text.intro}</p>
+        <div class="hero-actions">
+          <a class="action" href={localizedPath(locale, '/projects/')}>{text.projects} <span aria-hidden="true">→</span></a>
+          <SocialLinks {locale} />
+        </div>
+      </div>
+      <p class="interaction-hint" data-background-hint hidden>{text.backgroundHint}</p>
+    </section>
+
+    {featured && (
+      <section class="home-section enter enter-next" aria-labelledby="featured-title">
+        <div class="section-header">
+          <h2 id="featured-title">{text.featured}</h2>
+          <a href={localizedPath(locale, '/projects/')}>{text.allProjects} <span aria-hidden="true">→</span></a>
+        </div>
+        <article class="featured-project glass">
+          <div class="featured-media">
+            <img class="featured-image" src={featured.entry.data.image} alt="" width="1360" height="1000" />
+          </div>
+          <div class="featured-copy">
+            <h3 lang={featured.language}>{featured.entry.data.title}</h3>
+            <p lang={featured.language}>{featured.entry.data.description}</p>
+            <div class="hero-actions">
+              {featured.entry.data.demo && <a class="action" href={`${featured.entry.data.demo}?lang=${locale}`}>{text.openProject} <span aria-hidden="true">↗</span></a>}
+              <a class="back-link" href={localizedPath(locale, `/projects/${featured.slug}/`)}>{text.projectDetails}</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    )}
+
+    {latest.length > 0 && (
+      <section class="home-section enter enter-last" aria-labelledby="latest-title">
+        <div class="section-header">
+          <h2 id="latest-title">{text.latest}</h2>
+          <a href={localizedPath(locale, '/blog/')}>{text.allPosts} <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="post-list">
+          {latest.map(({ slug, entry: { data }, language }) => (
+            <li class="post-row">
+              <div lang={language}>
+                <h3><a href={localizedPath(locale, `/blog/${slug}/`)}>{data.title}</a></h3>
+                <p>{data.description}</p>
+              </div>
+              <time datetime={data.date.toISOString().slice(0, 10)}>{formatDate.format(data.date)}</time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</BaseLayout>

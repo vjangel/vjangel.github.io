@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { LocalizedEntry } from '../lib/content';
+import { copy, localizedPath, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  item: LocalizedEntry<'projects'> | LocalizedEntry<'posts'>;
+}
+
+const { locale, item } = Astro.props;
+const { slug, entry, language } = item;
+const { title, description, date } = entry.data;
+const project = entry.collection === 'projects' ? entry.data : undefined;
+const section = project ? 'projects' : 'blog';
+const formatDate = new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' });
+const { Content } = await render(entry);
+
+const backLabel = project ? copy[locale].allProjects : copy[locale].allPosts;
+const fallbackNote = locale === 'en' ? 'This entry is currently available in Chinese.' : '这篇内容目前以英文提供。';
+---
+
+<BaseLayout {locale} {title} {description} path={`/${section}/${slug}/`} active={section}>
+  <article class="shell">
+    <header class="page-intro">
+      <a class="back-link" href={localizedPath(locale, `/${section}/`)}>
+        <span aria-hidden="true">←</span> {backLabel}
+      </a>
+      <h1 class="section-title" lang={language}>{title}</h1>
+      {project
+        ? <p lang={language}>{description}</p>
+        : <time datetime={date.toISOString().slice(0, 10)}>{formatDate.format(date)}</time>}
+      {language !== locale && <p>{fallbackNote}</p>}
+    </header>
+    {project?.demo && <p><a class="action" href={`${project.demo}?lang=${locale}`}>{copy[locale].openProject} <span aria-hidden="true">↗</span></a></p>}
+    {project && <img class="project-image" src={project.image} alt={project.imageAlt ?? ''} lang={language} />}
+    <div class="prose" lang={language}>
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

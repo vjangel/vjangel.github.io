@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+import InteractiveBackground from '../components/InteractiveBackground.astro';
+import BackgroundToggle from '../components/BackgroundToggle.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { copy, localizedPath, locales, type Locale } from '../lib/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  active?: 'home' | 'projects' | 'blog';
+  locale: Locale;
+  path: string;
+}
+
+const { title, description, active, locale, path } = Astro.props;
+const text = copy[locale];
+const currentPath = localizedPath(locale, path);
+const navigation = [
+  { id: 'home', href: '/' },
+  { id: 'projects', href: '/projects/' },
+  { id: 'blog', href: '/blog/' },
+] as const;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description ?? text.intro} />
+    <meta name="theme-color" content="#111535" />
+    <title>{title ? `${title} · VeiJay` : `VeiJay · ${text.title}`}</title>
+    {Astro.site && <link rel="canonical" href={new URL(currentPath, Astro.site)} />}
+    {locales.map((language) => (
+      <link rel="alternate" hreflang={language} href={new URL(localizedPath(language, path), Astro.site ?? Astro.url)} />
+    ))}
+  </head>
+  <body class:list={{ 'interactive-home': active === 'home' }}>
+    {active === 'home' && <InteractiveBackground />}
+    <a class="skip-link" href="#main">{text.skip}</a>
+    <header class="shell site-header glass">
+      <div class="header-inner">
+        <a class="wordmark" href={localizedPath(locale, '/')} aria-label={`VeiJay · ${text.home}`}>Vei<span>Jay</span></a>
+        <nav class="main-nav" aria-label={text.navigation}>
+          {navigation.map(({ id, href }) => (
+            <a href={localizedPath(locale, href)} aria-current={active === id ? 'page' : undefined}>{text[id]}</a>
+          ))}
+        </nav>
+        <nav class="language-nav" aria-label={text.language}>
+          {locales.map((language) => (
+            <a href={localizedPath(language, path)} lang={language} hreflang={language}
+              aria-current={language === locale ? 'true' : undefined}
+              aria-label={language === 'en' ? 'English' : '简体中文'}>
+              {language === 'en' ? 'EN' : '中文'}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <span>VeiJay</span>
+        {active === 'home' && <BackgroundToggle {locale} />}
+        <SocialLinks {locale} />
+      </div>
+    </footer>
+  </body>
+</html>
