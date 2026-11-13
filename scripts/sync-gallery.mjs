@@ -46,6 +46,8 @@ html = replaceOnce(html, '<link rel="stylesheet" href="./gallery.css">', '<link 
 html = replaceOnce(html, '<script src="./gallery.js" defer></script>', '<script src="./download-links.js" defer></script>\n  <script src="./site-bridge.js" defer></script>\n  <script src="./gallery.js" defer></script>');
 html = replaceOnce(html, '<div class="site-settings">', '<div class="site-settings">\n        <a class="veijay-back" href="/" data-site-back aria-label="返回 VeiJay" title="返回 VeiJay"><span aria-hidden="true">←</span></a>');
 html = replaceOnce(html, '<footer class="site-footer">', '<footer class="site-footer">\n      <a href="/" data-site-back>← VeiJay</a>\n      <p class="download-notice" data-download-notice hidden></p>');
+// Use the gallery's reserved blog link; the site bridge keeps its locale in sync.
+html = replaceOnce(html, 'id="blogReturn" data-blog-url="" hidden', 'id="blogReturn" data-blog-url="https://vjangel.github.io/" data-site-back hidden');
 html = html.replace('An offline gallery of Windows cursor themes. Explore, preview, and download complete sets.', 'VeiJay cursor gallery. Explore animated Windows cursor themes and try every pointer role.');
 await fs.writeFile(path.join(destination, 'index.html'), html.trimEnd() + '\n');
 let app = await fs.readFile(path.join(destination, 'gallery.js'), 'utf8');

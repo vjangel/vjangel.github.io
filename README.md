@@ -78,6 +78,8 @@ npm run preview:gallery
 
 `public/cursor-gallery/site-bridge.js` 和 `.css` 负责个人站返回入口、语言衔接及下载状态；同步脚本保留这两个文件和 `download-links.js`，其余展馆核心文件来自原展馆。
 
+安装指南预留的 `#blogReturn` 入口由同步脚本接入 VeiJay；它与页眉、页脚的返回入口一起，随展馆语言跳转到中文或英文首页。只更新网页时，同步和部署页面即可，现有安装包及 Release 下载链接继续使用。
+
 旧 Hexo 站点保留在 Git 历史，迁移前提交为 `ef110fa8c6d7e6b13988d6deb39b6b8f677ba6a6`。迁移会替换旧页面结构，旧文章地址尚未建立重定向。
 
 部署参考：[Astro GitHub Pages 文档](https://docs.astro.build/en/guides/deploy/github/)、[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。

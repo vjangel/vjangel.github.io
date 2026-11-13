@@ -50,7 +50,7 @@ homePrevious|Previous theme|上一个主题|上一個主題|이전 테마|前の
 homeNext|Next theme|下一个主题|下一個主題|다음 테마|次のテーマ|Следующая тема
 homePause|Pause exhibit|暂停动画|暫停動畫|전시 일시 정지|展示を一時停止|Приостановить анимацию
 homePlay|Play exhibit|播放动画|播放動畫|전시 재생|展示を再生|Воспроизвести анимацию
-homeTry|Try pointer|试用光标|試用游標|포인터 체험|ポインターを試す|Попробовать курсор
+homeTry|Try across the gallery|全站试用|全站試用|갤러리 전체에서 체험|ギャラリー全体で試用|Попробовать во всей галерее
 homeStopTrial|Stop trial|结束试用|結束試用|체험 종료|試用を終了|Завершить пробу
 homeDetails|Open theme details|打开主题详情|開啟主題詳情|테마 상세 열기|テーマの詳細を開く|Открыть описание темы
 homeFullscreen|Enter fullscreen|进入全屏|進入全螢幕|전체 화면|全画面表示|Открыть на весь экран
@@ -66,8 +66,8 @@ heroThemeLabel|Current theme|当前主题|目前主題|현재 테마|現在の�
 heroInput|Type here|输入文字|輸入文字|텍스트 입력|文字を入力|Введите текст
 heroLink|Link|链接|連結|링크|リンク|Ссылка
 heroPrecision|Crosshair|十字|十字|십자선|十字|Прицел
-heroIdle|Start a trial, then move across the samples.|开启试用，把指针移到不同控件上。|開啟試用，把指標移到不同控制項上。|체험을 시작한 뒤 요소 위로 움직여 보세요.|試用を開始し、項目にポインターを合わせてください。|Начните пробу и наведите указатель на образцы.
-heroActive|Move over a sample to change the pointer. Esc to stop.|移动到不同控件切换光标，按 Esc 结束。|移到不同控制項切換游標，按 Esc 結束。|요소 위로 이동해 포인터를 바꿔 보세요. Esc로 종료합니다.|項目に合わせるとポインターが変わります。Esc で終了。|Наведите указатель на образец. Esc завершает пробу.
+heroIdle|Start a trial to use the pointer across the gallery.|开启后可在整个展馆试用光标。|開啟後可在整個展館試用游標。|시작하면 갤러리 전체에서 커서를 체험할 수 있습니다.|開始するとギャラリー全体でポインターを試せます。|Запустите пробу, чтобы использовать указатель во всей галерее.
+heroActive|The pointer works across the gallery.|已在整个展馆启用光标。|已在整個展館啟用游標。|갤러리 전체에서 커서가 적용됩니다.|ギャラリー全体で試用中です。|Указатель действует во всей галерее.
 heroTouch|Tap a sample to preview its animation.|点按任一控件查看动画。|點按任一控制項查看動畫。|요소를 탭해 애니메이션을 미리 보세요.|項目をタップして動きを確認できます。|Коснитесь образца, чтобы увидеть анимацию.
 paginationLabel|Collection pages|馆藏分页|館藏分頁|컬렉션 페이지|コレクションのページ|Страницы коллекции
 pagePrevious|Previous page|上一页|上一頁|이전 페이지|前のページ|Предыдущая страница
@@ -79,12 +79,17 @@ roleTotal|{count} roles per set|每套 {count} 个角色|每套 {count} 種游�
 collectionKicker|01 / THE COLLECTION|01 / 主题馆藏|01 / 主題館藏|01 / 컬렉션|01 / コレクション|01 / КОЛЛЕКЦИЯ
 collectionTitle|Find your cursor|找到你的光标|找到你的游標|나만의 커서 찾기|お気に入りのカーソルを探す|Найдите свой курсор
 collectionDescription|Open a theme to try its cursors, explore each role, and download the set.|打开任一主题，试用光标、查看各个角色或下载整套。|開啟任一主題，試用游標、瀏覽各種功能或下載整套。|테마를 열어 커서를 체험하고 각 역할을 살펴보거나 전체 세트를 다운로드하세요.|テーマを開くと、カーソルを試し、各役割を確認して、セットをダウンロードできます。|Откройте тему, чтобы попробовать курсоры, изучить их роли и скачать набор.
+openTheme|Explore and try|查看与试用|瀏覽與試用|살펴보고 체험하기|詳細と試用|Посмотреть и попробовать
 studioKicker|02 / THE STUDIO|02 / 光标工作室|02 / 游標工作室|02 / 스튜디오|02 / スタジオ|02 / СТУДИЯ
 version|Release {version}|版本 {version}|版本 {version}|버전 {version}|バージョン {version}|Версия {version}
-aboutKicker|03 / TAKE IT HOME|03 / 带到桌面|03 / 帶到桌面|03 / 내 PC에 적용|03 / デスクトップへ|03 / НА РАБОЧИЙ СТОЛ
 aboutTitle|From the gallery to your desktop|从展馆到你的桌面|從展館到你的桌面|갤러리에서 바탕 화면으로|ギャラリーからデスクトップへ|Из галереи на ваш рабочий стол
 aboutDescription|Download the theme ZIP and extract it completely. Open the extracted folder and keep the Animated and Static subfolders alongside the installer.|下载主题 ZIP 并完整解压。打开解压后的文件夹，让 Animated 和 Static 子文件夹与安装文件留在同一目录。|下載主題 ZIP 並完整解壓縮。開啟解壓縮後的資料夾，將 Animated 和 Static 子資料夾與安裝檔留在同一目錄。|테마 ZIP을 다운로드하고 전체 압축을 풉니다. 압축을 푼 폴더를 열고 Animated 및 Static 하위 폴더를 설치 파일과 같은 위치에 둡니다.|テーマの ZIP をダウンロードしてすべて展開します。展開したフォルダーを開き、Animated と Static のサブフォルダーをインストーラーと同じ場所に置きます。|Скачайте ZIP с темой и полностью распакуйте его. Откройте распакованную папку и оставьте подпапки Animated и Static рядом с установщиком.
-aboutBrowse|Back to collection|返回馆藏|返回館藏|컬렉션으로 돌아가기|コレクションに戻る|Вернуться к коллекции
+guideBreadcrumb|Guide location|指南导航|指南導覽|안내 경로|ガイドの現在地|Раздел руководства
+blogReturn|Back to the blog|返回个人博客|返回個人部落格|개인 블로그로 돌아가기|個人ブログに戻る|Вернуться в блог
+guideChoose|Choose a theme from the collection|前往馆藏选择主题|前往館藏選擇主題|컬렉션에서 테마 선택|コレクションからテーマを選ぶ|Выбрать тему из коллекции
+guideExtractTitle|Download and extract|下载并解压|下載並解壓縮|다운로드 후 압축 풀기|ダウンロードして展開|Скачайте и распакуйте
+guideReference|Other actions|其他操作|其他操作|기타 작업|その他の操作|Другие действия
+guideCompatibility|Windows compatibility|Windows 兼容性|Windows 相容性|Windows 호환성|Windows の互換性|Совместимость с Windows
 itemLabel|{name}|{name}|{name}|{name}|{name}|{name}
 categoryNew|New styles|新风格|新風格|새로운 스타일|新作スタイル|Новые стили
 categoryObjects|Objects|物件主题|物件主題|사물 테마|モチーフ|Предметы
@@ -106,6 +111,24 @@ pointerTouch|Touch mode|触屏模式|觸控模式|터치 모드|タッチモー�
 pointerNative|Browser pointer|浏览器指针|瀏覽器游標|브라우저 포인터|ブラウザーのポインター|Указатель браузера
 emptyResults|No themes match these filters.|没有符合筛选条件的主题。|沒有符合篩選條件的主題。|필터에 맞는 테마가 없습니다.|条件に一致するテーマがありません。|По этим фильтрам темы не найдены.
 clearFilters|Clear filters|清除筛选|清除篩選|필터 지우기|絞り込みを解除|Сбросить фильтры
+tagFilters|Tag filters|标签筛选|標籤篩選|태그 필터|タグで絞り込む|Фильтры по меткам
+styleFilter|Visual style|风格|風格|시각 스타일|スタイル|Стиль
+subjectFilter|Subject|题材|題材|소재|モチーフ|Мотив
+allStyles|All styles|全部风格|全部風格|모든 스타일|すべてのスタイル|Все стили
+allSubjects|All subjects|全部题材|全部題材|모든 소재|すべてのモチーフ|Все мотивы
+clearTags|Clear tag filters|清除标签|清除標籤|태그 필터 지우기|タグの絞り込みを解除|Сбросить метки
+themeTags|Theme tags|主题标签|主題標籤|테마 태그|テーマのタグ|Метки темы
+detailTags|Cursor tags|光标标签|游標標籤|커서 태그|カーソルのタグ|Метки курсора
+browseTag|Browse themes tagged {tag}|浏览「{tag}」主题|瀏覽「{tag}」主題|{tag} 태그가 있는 테마 보기|「{tag}」のテーマを見る|Темы с меткой «{tag}»
+roleGroupFilter|Cursor purpose|用途|用途|커서 용도|用途|Назначение курсора
+allRoleGroups|All purposes|全部用途|全部用途|모든 용도|すべての用途|Все назначения
+roleGroupSelection|Selection and status|选择与状态|選取與狀態|선택 및 상태|選択と状態|Выбор и состояние
+roleGroupInput|Input and positioning|输入与定位|輸入與定位|입력 및 위치 지정|入力と位置指定|Ввод и позиционирование
+roleGroupResize|Resizing and moving|调整与移动|調整與移動|크기 조절 및 이동|サイズ変更と移動|Изменение размера и перемещение
+roleTagFilter|Function tag|功能标签|功能標籤|기능 태그|機能タグ|Метка функции
+allRoleTags|All function tags|全部标签|全部標籤|모든 기능 태그|すべての機能タグ|Все метки функций
+filterRoleTag|Show cursors tagged {tag}|筛选「{tag}」光标|篩選「{tag}」游標|{tag} 태그가 있는 커서 보기|「{tag}」のカーソルを表示|Курсоры с меткой «{tag}»
+roleGridTotal|{count} cursor roles|{count} 种光标|{count} 種游標|커서 역할 {count}개|{count} 種類のカーソル|Типов курсоров: {count}
 favorited|Favorited|已收藏|已收藏|즐겨찾기에 추가됨|お気に入り登録済み|В избранном
 favorite|Favorite|收藏|收藏|즐겨찾기|お気に入り|В избранное
 favoriteName|{name}, favorited|{name}，已收藏|{name}，已收藏|{name}, 즐겨찾기에 추가됨|{name}、お気に入り登録済み|{name} — в избранном
@@ -122,7 +145,7 @@ comparisonPreview|{theme} · {role}|{theme} · {role}|{theme} · {role}|{theme} 
 skip|Skip to main content|跳到主要内容|跳到主要內容|본문으로 건너뛰기|メインコンテンツへ移動|Перейти к основному содержанию
 brandHome|Cursor Gallery home|光标展馆首页|游標展館首頁|커서 갤러리 홈|カーソルギャラリーのトップ|Главная страница галереи курсоров
 mainNav|Main navigation|主导航|主導覽|주 메뉴|メインナビゲーション|Главное меню
-searchPlaceholder|Search names or styles|搜索名称或风格|搜尋名稱或風格|이름 또는 스타일 검색|名前やスタイルを検索|Найти название или стиль
+searchPlaceholder|Search names or tags|搜索名称或标签|搜尋名稱或標籤|이름 또는 태그 검색|名前やタグで検索|Поиск по названию или метке
 searchThemes|Search themes|搜索主题|搜尋主題|테마 검색|テーマを検索|Поиск тем
 category|Theme category|主题分类|主題分類|테마 분류|テーマのカテゴリ|Категория темы
 categoryAll|All categories|全部分类|全部分類|모든 분류|すべてのカテゴリ|Все категории
@@ -145,14 +168,20 @@ previousFrame|Previous frame|上一帧|上一影格|이전 프레임|前のフ�
 nextFrame|Next frame|下一帧|下一影格|다음 프레임|次のフレーム|Следующий кадр
 animationFrame|Animation frame|动画帧|動畫影格|애니메이션 프레임|アニメーションのフレーム|Кадр анимации
 pointerControls|Web pointer settings|网页指针设置|網頁游標設定|웹 포인터 설정|ウェブポインターの設定|Настройки веб-указателя
-liveCursor|Try web pointer|网页试用光标|在網頁試用游標|웹에서 포인터 체험|ウェブでポインターを試す|Попробовать указатель на сайте
+liveCursor|Try across the gallery|全站试用光标|全站試用游標|갤러리 전체에서 커서 체험|ギャラリー全体でポインターを試す|Попробовать указатель во всей галерее
 cursorSize|Pointer size|指针大小|游標大小|포인터 크기|ポインターのサイズ|Размер указателя
 autoRole|Automatic roles|自动状态|自動切換|역할 자동 전환|役割の自動切り替え|Автоподбор роли
-escapeHint|Press Esc to restore the browser pointer|按 Esc 恢复浏览器指针|按 Esc 還原瀏覽器游標|Esc 키로 브라우저 포인터 복원|Esc キーでブラウザーのポインターに戻す|Нажмите Esc, чтобы вернуть указатель браузера
 studioViews|Studio views|工作室视图|工作室檢視|스튜디오 보기|スタジオの表示モード|Разделы студии
 libraryTab|All roles|全部角色|全部游標|모든 역할|すべての役割|Все роли
 compareTab|Compare|对比|比較|비교|比較|Сравнение
 playgroundTab|Try it|交互试用|互動試用|체험|試用|Пробная зона
+enterPlayground|Open try area|进入试用区|進入試用區|체험 공간 열기|試用エリアを開く|Открыть пробную зону
+backToStudio|Back to studio|返回工作室|返回工作室|스튜디오로 돌아가기|スタジオに戻る|Вернуться в студию
+trialAuto|Switch with each control|随控件自动切换|隨控制項自動切換|컨트롤에 따라 자동 전환|操作に合わせて自動で切り替える|Менять курсор по элементу
+trialOff|Web cursor trial ended|网页试用已结束|網頁試用已結束|웹 커서 체험이 끝났습니다|ウェブカーソルの試用を終了しました|Проба веб-курсора завершена
+siteTrialTitle|Gallery-wide trial|全站试用中|全站試用中|갤러리 전체에서 체험 중|ギャラリー全体で試用中|Проба во всей галерее
+siteTrialPreview|Animation preview active|动画预览中|動畫預覽中|애니메이션 미리 보기|アニメーションのプレビュー中|Предпросмотр анимации
+siteTrialAuto|Automatic roles|自动切换|自動切換|자동 전환|自動切り替え|Автоподбор ролей
 roleHint|Select a cursor to view details|选择光标查看详情|選擇游標查看詳細資料|커서를 선택해 자세히 보기|カーソルを選ぶと詳細が表示されます|Выберите курсор для просмотра деталей
 roleGridTitle|Windows cursor roles|Windows 光标角色|Windows 游標功能|Windows 커서 역할|Windows カーソルの役割|Роли курсоров Windows
 compareA|Theme A|主题 A|主題 A|테마 A|テーマ A|Тема A
@@ -195,10 +224,10 @@ detailPreview|Enlarged cursor preview|放大的光标预览|放大的游標預�
 installScriptTitle|Install and apply with the script|用脚本安装并应用|用指令碼安裝並套用|스크립트로 설치 및 적용|スクリプトでインストールして適用|Установка и применение скриптом
 installScript|Double-click Install.cmd in the extracted folder. It registers both schemes for your Windows account and applies the animated scheme immediately.|在解压后的文件夹里双击 Install.cmd。它会为当前 Windows 用户注册动态和静态两种方案，并立即应用动态方案。|在解壓縮後的資料夾中按兩下 Install.cmd。它會為目前的 Windows 使用者註冊動態和靜態兩種配置，並立即套用動態配置。|압축을 푼 폴더에서 Install.cmd를 두 번 클릭합니다. 현재 Windows 계정에 두 구성표가 등록되고 움직이는 구성표가 즉시 적용됩니다.|展開したフォルダーで Install.cmd をダブルクリックします。現在の Windows アカウントに 2 種類のデザインが登録され、動くデザインがすぐに適用されます。|Дважды щёлкните Install.cmd в распакованной папке. Скрипт зарегистрирует обе схемы для текущей учётной записи Windows и сразу применит анимированную.
 installInfTitle|Install with INF|通过 INF 安装|使用 INF 安裝|INF로 설치|INF でインストール|Установка через INF
-installInf|Right-click Install.inf. On Windows 7 or 10, choose Install. On Windows 11, choose Show more options if needed, then choose Install in the classic menu. This registers both schemes. Use the steps below to apply one.|右键单击 Install.inf。Windows 7 或 10 直接选择「安装」。Windows 11 如需展开旧版菜单，先选「显示更多选项」，再选「安装」。这会注册两种方案，安装后按下方步骤选择并应用。|以滑鼠右鍵點選 Install.inf。Windows 7 或 10 直接選擇「安裝」。Windows 11 如需開啟傳統選單，先選「顯示其他選項」，再選「安裝」。這會註冊兩種配置，安裝後依照下方步驟選擇並套用。|Install.inf를 마우스 오른쪽 버튼으로 클릭합니다. Windows 7 또는 10에서는 설치를 선택합니다. Windows 11에서는 필요한 경우 더 많은 옵션 표시를 선택한 뒤 기존 메뉴에서 설치를 선택합니다. 두 구성표가 등록됩니다. 아래 단계에 따라 하나를 적용합니다.|Install.inf を右クリックします。Windows 7 または 10 では［インストール］を選びます。Windows 11 では必要に応じて［その他のオプションを表示］を開き、従来のメニューで［インストール］を選びます。2 種類のデザインが登録されます。下の手順で選択して適用します。|Щёлкните правой кнопкой мыши по Install.inf. В Windows 7 или 10 выберите «Установить». В Windows 11 при необходимости нажмите «Показать дополнительные параметры», затем выберите «Установить» в классическом меню. Обе схемы будут зарегистрированы. Примените нужную схему по инструкции ниже.
+installInf|Right-click Install.inf. On Windows 7 or 10, choose Install. On Windows 11, choose Show more options if needed, then choose Install in the classic menu. This registers both schemes. Apply the scheme manually after installing.|右键单击 Install.inf。Windows 7 或 10 直接选择「安装」。Windows 11 如需展开旧版菜单，先选「显示更多选项」，再选「安装」。这会注册两种方案，安装后需手动应用。|以滑鼠右鍵點選 Install.inf。Windows 7 或 10 直接選擇「安裝」。Windows 11 如需開啟傳統選單，先選「顯示其他選項」，再選「安裝」。這會註冊兩種配置，安裝後需手動套用。|Install.inf를 마우스 오른쪽 버튼으로 클릭합니다. Windows 7 또는 10에서는 설치를 선택합니다. Windows 11에서는 필요한 경우 더 많은 옵션 표시를 선택한 뒤 기존 메뉴에서 설치를 선택합니다. 두 구성표가 등록됩니다. 설치 후 수동으로 적용합니다.|Install.inf を右クリックします。Windows 7 または 10 では［インストール］を選びます。Windows 11 では必要に応じて［その他のオプションを表示］を開き、従来のメニューで［インストール］を選びます。2 種類のデザインが登録されます。インストール後に手動で適用します。|Щёлкните правой кнопкой мыши по Install.inf. В Windows 7 или 10 выберите «Установить». В Windows 11 при необходимости нажмите «Показать дополнительные параметры», затем выберите «Установить» в классическом меню. Обе схемы будут зарегистрированы. После установки примените нужную схему вручную.
 uninstallTitle|Remove a theme|卸载主题|解除安裝主題|테마 제거|テーマをアンインストール|Удаление темы
 uninstall|Run Uninstall.cmd from the extracted ZIP for the version you want to remove.|要卸载哪个版本，就在该版本解压后的文件夹里运行 Uninstall.cmd。|要解除安裝哪個版本，就在該版本解壓縮後的資料夾裡執行 Uninstall.cmd。|제거할 버전의 압축을 푼 폴더에서 Uninstall.cmd를 실행합니다.|削除するバージョンを展開したフォルダーで Uninstall.cmd を実行します。|Запустите Uninstall.cmd из распакованной папки той версии, которую хотите удалить.
-installSwitchTitle|Apply or switch schemes on Windows 7, 10 and 11|在 Windows 7、10、11 应用或切换方案|在 Windows 7、10、11 套用或切換配置|Windows 7, 10, 11에서 구성표 적용 또는 전환|Windows 7、10、11 でデザインを適用・切り替え|Применение и смена схемы в Windows 7, 10 и 11
+installSwitchTitle|Apply or switch schemes|应用或切换方案|套用或切換配置|구성표 적용 또는 전환|デザインを適用・切り替え|Применение и смена схемы
 installSwitch|Press Win + R, enter main.cpl, then press Enter. In Mouse Properties, open Pointers and choose the theme and version under Scheme. Choose (Animated) for moving pointers or (Static) for still pointers, then select Apply or OK.|按 Win + R，输入 main.cpl 后回车。在「鼠标属性」中打开「指针」选项卡，在「方案」下拉框中选择对应的主题和版本。带 (Animated) 的是动态方案，带 (Static) 的是静态方案。选好后点「应用」或「确定」。|按 Win + R，輸入 main.cpl 後按 Enter。在「滑鼠內容」的「指標」分頁中，從「配置」下拉選單選擇對應的主題和版本。帶有 (Animated) 的是動態配置，帶有 (Static) 的是靜態配置。選好後點選「套用」或「確定」。|Win + R을 누르고 main.cpl을 입력한 뒤 Enter를 누릅니다. 마우스 속성에서 포인터 탭을 열고 구성표 목록에서 테마와 버전을 선택합니다. (Animated)는 움직이는 포인터, (Static)는 정적 포인터입니다. 적용 또는 확인을 선택합니다.|Win + R を押し、main.cpl と入力して Enter キーを押します。マウスのプロパティの［ポインター］タブを開き、［デザイン］からテーマとバージョンを選びます。(Animated) は動くポインター、(Static) は静止ポインターです。［適用］または［OK］を選びます。|Нажмите Win + R, введите main.cpl и нажмите Enter. В свойствах мыши откройте вкладку «Указатели» и выберите тему и версию в списке «Схема». (Animated) означает анимированные указатели, (Static) — статические. Нажмите «Применить» или «ОК».
 windowsSupport|Each ZIP contains all 17 roles. Windows 7 lists the 15 classic roles on the Pointers tab. Location Select and Person Select appear on Windows 10 and 11 versions that support them.|每个 ZIP 含 17 种角色。Windows 7 的「指针」选项卡只列出 15 个经典角色。支持扩展角色的 Windows 10 和 11 版本还会显示「位置选择」(Location Select) 和「人员选择」(Person Select)。|每個 ZIP 含 17 種角色。Windows 7 的「指標」分頁只列出 15 個傳統角色。支援擴充角色的 Windows 10 和 11 版本也會顯示「位置選取」(Location Select) 和「人員選取」(Person Select)。|각 ZIP에는 17개 역할이 들어 있습니다. Windows 7의 포인터 탭에는 기본 역할 15개가 표시됩니다. 확장 역할을 지원하는 Windows 10 및 11 버전에는 위치 선택(Location Select)과 사람 선택(Person Select)도 표시됩니다.|各 ZIP には 17 種類の役割が入っています。Windows 7 の［ポインター］タブには従来の 15 種類が表示されます。拡張役割に対応する Windows 10 と 11 のバージョンでは場所の選択 (Location Select) と人の選択 (Person Select) も表示されます。|В каждом ZIP есть все 17 ролей. В Windows 7 на вкладке «Указатели» отображаются 15 классических ролей. В версиях Windows 10 и 11 с поддержкой расширенных ролей также отображаются выбор места (Location Select) и выбор человека (Person Select).
 windowsBadge|Windows 7 / 10 / 11|Windows 7 / 10 / 11|Windows 7 / 10 / 11|Windows 7 / 10 / 11|Windows 7 / 10 / 11|Windows 7 / 10 / 11
@@ -329,6 +358,64 @@ prism-fold-hd|Colorful folds and crystalline facets in a native Windows animated
     ['经典方案', 'categoryClassic'],
   ]);
 
+  const tagLabels = readRows(`
+cute|Cute|可爱|可愛|귀여움|かわいい|Милый
+minimal|Minimal|简约|簡約|미니멀|ミニマル|Минимализм
+pixel|Pixel art|像素|像素|픽셀 아트|ドット絵|Пиксельная графика
+retro|Retro|复古|復古|레트로|レトロ|Ретро
+futuristic|Futuristic|未来科技|未來科技|미래 기술|近未来|Футуризм
+neon|Neon|霓虹|霓虹|네온|ネオン|Неон
+mechanical|Mechanical|机械|機械|기계풍|メカ|Механика
+handcrafted|Handcrafted|手作|手作|수공예풍|手作り|Ручная работа
+geometric|Geometric|几何|幾何|기하학|幾何学|Геометрия
+translucent|Translucent|通透|通透|반투명|半透明|Полупрозрачность
+surreal|Surreal|超现实|超現實|초현실|シュール|Сюрреализм
+industrial|Industrial|工业|工業|인더스트리얼|インダストリアル|Индустриальный
+illustrative|Illustrated|插画|插畫|일러스트|イラスト|Иллюстрация
+organic|Organic shapes|有机形态|有機形態|유기적 형태|有機的な形|Органические формы
+food|Food|美食|美食|음식|食べ物|Еда
+animals|Animals|动物|動物|동물|動物|Животные
+plants|Plants|植物|植物|식물|植物|Растения
+ocean|Ocean|海洋|海洋|바다|海|Океан
+space|Space|太空|太空|우주|宇宙|Космос
+weather|Weather|天气|天氣|날씨|天気|Погода
+geology|Geology|地质|地質|지질|地質|Геология
+games|Games|游戏|遊戲|게임|ゲーム|Игры
+sports|Sports|运动|運動|스포츠|スポーツ|Спорт
+tools|Tools|工具|工具|도구|道具|Инструменты
+transport|Transport|交通|交通|교통|交通|Транспорт
+craft|Craft|工艺|工藝|공예|工芸|Ремёсла
+folklore|Folklore|民俗|民俗|민속|民俗|Фольклор
+household|Everyday objects|日常物件|日常物件|생활용품|日用品|Бытовые предметы
+electronics|Electronics|电子设备|電子裝置|전자 기기|電子機器|Электроника
+fantasy|Fantasy|奇幻|奇幻|판타지|ファンタジー|Фэнтези
+machinery|Machinery|机械装置|機械裝置|기계 장치|機械装置|Механизмы
+pointer|Pointing|指向|指向|가리키기|指し示す|Наведение
+navigation|Navigation|导航|導覽|탐색|ナビゲーション|Навигация
+help|Help|帮助|說明|도움말|ヘルプ|Справка
+status|Status|状态提示|狀態提示|상태 표시|状態表示|Состояние
+background|Background activity|后台运行|背景執行|백그라운드 작업|バックグラウンド処理|Фоновая работа
+waiting|Waiting|等待|等候|대기|待機|Ожидание
+precision|Precision|精确定位|精確定位|정밀 지정|精密な位置指定|Точное наведение
+drawing|Drawing|绘制|繪製|그리기|描画|Рисование
+text|Text|文本|文字|텍스트|テキスト|Текст
+editing|Editing|编辑|編輯|편집|編集|Редактирование
+handwriting|Handwriting|手写|手寫|손글씨|手書き|Рукописный ввод
+unavailable|Unavailable|不可用|無法使用|사용 불가|使用不可|Недоступно
+resize|Resizing|尺寸调整|調整大小|크기 조절|サイズ変更|Изменение размера
+vertical|Vertical|垂直|垂直|세로|縦方向|Вертикаль
+horizontal|Horizontal|水平|水平|가로|横方向|Горизонталь
+diagonal|Diagonal|对角|對角|대각선|対角方向|Диагональ
+move|Moving|移动|移動|이동|移動|Перемещение
+drag|Dragging|拖动|拖曳|드래그|ドラッグ|Перетаскивание
+alternate|Alternate selection|候选选择|替代選取|대체 선택|代替選択|Альтернативный выбор
+link|Links|链接|連結|링크|リンク|Ссылки
+location|Location|位置|位置|위치|場所|Местоположение
+person|Person|人员|人員|사람|人物|Человек
+map|Map|地图|地圖|지도|地図|Карта
+contact|Contacts|联系人|聯絡人|연락처|連絡先|Контакты
+`);
+
   const traditionalRegions = new Map([
     ['hk', 'zh-HK'], ['mo', 'zh-MO'], ['tw', 'zh-TW'],
   ]);
@@ -392,6 +479,10 @@ prism-fold-hd|Colorful folds and crystalline facets in a native Windows animated
     return lookup(roles, resolveLocale(locale), id) || id;
   }
 
+  function tag(locale, id) {
+    return lookup(tagLabels, resolveLocale(locale), id) || lookup(tags, resolveLocale(locale), id) || id;
+  }
+
   function theme(locale, data) {
     const language = resolveLocale(locale);
     const groupKey = groupKeys.get(data.group);
@@ -404,7 +495,7 @@ prism-fold-hd|Colorful folds and crystalline facets in a native Windows animated
     };
   }
 
-  const api = { locales, resolveLocale, t, role, theme };
+  const api = { locales, resolveLocale, t, role, tag, theme };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.CursorGalleryI18n = api;
 })(typeof window === 'undefined' ? globalThis : window);
