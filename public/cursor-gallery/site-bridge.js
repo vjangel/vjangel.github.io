@@ -17,7 +17,7 @@
     const currentUrl = new URL(location.href);
     if (currentUrl.searchParams.get('lang') !== routeLanguage()) {
       currentUrl.searchParams.set('lang', routeLanguage());
-      history.replaceState(null, '', currentUrl);
+      history.replaceState(history.state, '', currentUrl);
     }
     for (const link of document.querySelectorAll('[data-site-back]')) {
       link.href = chinese ? '/' : '/en/';

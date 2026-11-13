@@ -11,10 +11,16 @@
   function cursorPosition(x,y,hotspot,size){return{left:x-hotspot[0]*size/128,top:y-hotspot[1]*size/128};}
   function roleTiming(theme,role){return theme.roles?.[role]?.durationsMs?.length?theme.roles[role]:theme;}
   function roleLayout(theme,role){return theme.roles?.[role]?.atlasLayout||theme.atlas;}
-  function filterThemes(themes,query,category,favoritesOnly,favorites){
+  const facetNames=['style','subject'];
+  function filterThemes(themes,query,category,favoritesOnly,favorites,facets={}){
     const group={new:'新风格',objects:'物件主题',classic:'经典方案'}[category];
     const q=String(query||'').trim().toLocaleLowerCase();const set=new Set(favorites||[]);
-    return themes.filter(t=>(!group||t.group===group)&&(!favoritesOnly||set.has(t.id))&&(!q||[t.name,t.description,t.id,...(t.tags||[])].join(' ').toLocaleLowerCase().includes(q)));
+    return themes.filter(t=>
+      (!group||t.group===group)&&
+      (!favoritesOnly||set.has(t.id))&&
+      facetNames.every(name=>!facets[name]||t.facets?.[name]?.includes(facets[name]))&&
+      (!q||[t.name,t.description,t.id,...(t.tags||[])].join(' ').toLocaleLowerCase().includes(q))
+    );
   }
   function themePage(themes,requested){
     const size=6,pages=Math.max(1,Math.ceil(themes.length/size));
@@ -28,18 +34,30 @@
     const params=new URLSearchParams(search),view=params.get('view');
     if(params.has('theme')){
       const themeId=canonicalThemeId(params.get('theme'));
-      if(themes.some(theme=>theme.id===themeId))return{view:'theme',themeId};
+      const theme=themes.find(theme=>theme.id===themeId);
+      if(theme){
+        const tryRole=params.get('try');
+        return tryRole&&Object.hasOwn(theme.roles||{},tryRole)?{view:'theme',themeId,tryRole}:{view:'theme',themeId};
+      }
     }else if(view==='guide')return{view:'guide'};
     else if(view!=='collection')return{view:'home'};
     const page=Number(params.get('page'));
     const category=params.get('category');
-    return{view:'collection',page:Number.isSafeInteger(page)&&page>0?page:1,
+    const route={view:'collection',page:Number.isSafeInteger(page)&&page>0?page:1,
       query:params.get('q')||'',category:['new','objects','classic'].includes(category)?category:'all',
       favoritesOnly:params.get('favorites')==='1'};
+    for(const name of facetNames){
+      const value=params.get(name);
+      if(value&&themes.some(theme=>theme.facets?.[name]?.includes(value)))route[name]=value;
+    }
+    return route;
   }
   function galleryHref(view,options={}){
     const params=new URLSearchParams();
-    if(view==='theme')params.set('theme',options.themeId);
+    if(view==='theme'){
+      params.set('theme',options.themeId);
+      if(options.tryRole)params.set('try',options.tryRole);
+    }
     else if(view==='guide')params.set('view',view);
     else if(view==='collection'){
       params.set('view',view);
@@ -47,6 +65,7 @@
       if(options.query)params.set('q',options.query);
       if(options.category&&options.category!=='all')params.set('category',options.category);
       if(options.favoritesOnly)params.set('favorites','1');
+      for(const name of facetNames)if(options[name])params.set(name,options[name]);
     }
     const query=params.toString();
     return './index.html'+(query?'?'+query:'');

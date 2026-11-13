@@ -6,6 +6,19 @@
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="VeiJay cursor gallery. Explore animated Windows cursor themes and try every pointer role.">
   <title>光标展馆 · Cursor Gallery</title>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const params = new URLSearchParams(location.search);
+      const view = params.get('view');
+      const legacy = location.search ? '' : ({'#collection':'collection','#studio':'theme','#install':'guide'}[location.hash] || '');
+      root.dataset.view = params.has('theme') ? 'theme' : legacy || (['collection','guide'].includes(view) ? view : 'home');
+      try {
+        const appearance = JSON.parse(localStorage.getItem('cursor-gallery-v1') || '{}')?.appearance;
+        if (['auto','light','dark','theme'].includes(appearance)) root.dataset.appearance = appearance;
+      } catch {}
+    })();
+  </script>
   <link rel="stylesheet" href="./gallery.css">
   <link rel="stylesheet" href="./site-bridge.css">
   <script src="./catalog.js" defer></script>
@@ -15,7 +28,7 @@
   <script src="./site-bridge.js" defer></script>
   <script src="./gallery.js" defer></script>
 </head>
-<body id="top" data-background="light" data-view="home">
+<body id="top" data-background="light">
   <a class="skip-link" href="#mainContent" data-i18n="skip">跳到主要内容</a>
   <header class="site-header">
     <div class="site-header-inner shell">
@@ -52,6 +65,7 @@
   <main class="shell" id="mainContent" tabindex="-1">
     <section id="homeStage" class="home-stage" data-view-panel="home" aria-labelledby="heroTitle">
       <h1 id="heroTitle" class="sr-only" data-i18n="heroTitle">会动的光标</h1>
+      <div id="homeAtmosphere" class="home-atmosphere" aria-hidden="true"><div class="stage-aurora"></div></div>
       <div id="homeGesture" class="stage-viewport" data-cursor="Arrow" tabindex="0" role="region" data-i18n-aria-label="homeGesture">
         <svg class="stage-guides" viewBox="0 0 840 640" fill="none" aria-hidden="true">
           <path class="stage-guide-rule" d="M420 38v564M104 320h632M188 88l464 464M652 88 188 552"/>
@@ -65,13 +79,19 @@
         <div class="stage-information">
           <div class="stage-caption">
             <div class="stage-caption-top"><span class="stage-signal" aria-hidden="true"></span><span id="homeIndex"></span><span id="homeFeaturedGroup"></span></div>
-            <div class="stage-name"><strong id="homeFeaturedName"></strong><a class="stage-icon stage-details" id="homeFeatured" href="./index.html?view=collection" data-i18n-aria-label="homeDetails" data-i18n-title="homeDetails"><span aria-hidden="true">↗</span></a></div>
+            <div class="stage-name">
+              <strong id="homeFeaturedName"></strong>
+              <a class="stage-icon stage-details" id="homeFeatured" href="./index.html?view=collection" aria-describedby="homeFeaturedName" data-i18n-aria-label="homeDetails" data-i18n-title="homeDetails">
+                <svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5h6v6m0-6-8 8M9 5H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg>
+              </a>
+            </div>
             <small class="theme-english stage-english" id="homeFeaturedEnglish" lang="en" hidden></small>
             <div class="stage-role-name" id="homeRoleName"></div>
           </div>
           <div class="stage-tools">
-            <button id="homeTry" class="stage-try" type="button" aria-pressed="false" data-cursor="Hand" data-i18n-aria-label="heroTry" data-i18n-title="heroTry">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 14 11-7 1-3.5 6L5 3Z"/><path d="m12 15 3 5"/></svg><span data-i18n="heroTry">试用光标</span>
+            <a id="homeOpenTrial" class="stage-try stage-open-trial" aria-describedby="homeFeaturedName homeRoleName" hidden><span data-i18n="enterPlayground">进入试用区</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+            <button id="homeTry" class="stage-try" type="button" aria-pressed="false" data-cursor="Hand" data-i18n-aria-label="homeTry" data-i18n-title="homeTry">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 14 11-7 1-3.5 6L5 3Z"/><path d="m12 15 3 5"/></svg><span data-i18n="homeTry">全站试用</span>
             </button>
             <button id="homePause" class="stage-icon" type="button" aria-pressed="false" data-i18n-aria-label="homePause" data-i18n-title="homePause">
               <svg class="stage-pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14m6-14v14"/></svg>
@@ -85,9 +105,9 @@
         </div>
         <div id="homeRoleOptions" class="stage-roles" role="group" data-i18n-aria-label="homeRoles"></div>
         <div class="stage-strip">
-          <button id="homePrevious" class="stage-icon stage-step" type="button" data-i18n-aria-label="homePrevious" data-i18n-title="homePrevious"><span aria-hidden="true">←</span></button>
+          <button id="homePrevious" class="stage-icon stage-step" type="button" aria-controls="homeCards" data-i18n-aria-label="homePrevious" data-i18n-title="homePrevious"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
           <div id="homeCards" class="stage-thumbnails" role="group" data-i18n-aria-label="homeThemes"></div>
-          <button id="homeNext" class="stage-icon stage-step" type="button" data-i18n-aria-label="homeNext" data-i18n-title="homeNext"><span aria-hidden="true">→</span></button>
+          <button id="homeNext" class="stage-icon stage-step" type="button" aria-controls="homeCards" data-i18n-aria-label="homeNext" data-i18n-title="homeNext"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
         </div>
         <p id="homeStatus" class="sr-only" role="status"></p>
       </div>
@@ -113,15 +133,26 @@
           <option value="objects" data-i18n="categoryObjects">物件主题</option>
           <option value="classic" data-i18n="categoryClassic">经典方案</option>
         </select>
-        <button id="favoriteFilter" class="button favorite-filter" type="button" aria-pressed="false" data-i18n-aria-label="favoritesOnly"><span aria-hidden="true">☆</span><span data-i18n="favorite">收藏</span></button>
+        <button id="favoriteFilter" class="button favorite-filter" type="button" aria-pressed="false" data-i18n-aria-label="favoritesOnly"><svg class="control-icon favorite-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9Z"/></svg><span data-i18n="favorite">收藏</span></button>
+      </div>
+      <div class="tag-filters" id="tagFilters" role="group" data-i18n-aria-label="tagFilters" hidden>
+        <div class="control-field">
+          <label for="styleFilter" data-i18n="styleFilter">风格</label>
+          <select id="styleFilter"><option value="" data-i18n="allStyles">全部风格</option></select>
+        </div>
+        <div class="control-field">
+          <label for="subjectFilter" data-i18n="subjectFilter">题材</label>
+          <select id="subjectFilter"><option value="" data-i18n="allSubjects">全部题材</option></select>
+        </div>
+        <button id="clearTagFilters" class="subtle-button" type="button" data-i18n="clearTags" hidden>清除标签</button>
       </div>
       <nav id="themeList" class="theme-list" data-i18n-aria-label="chooseTheme"></nav>
       <nav id="pagination" class="pagination" data-i18n-aria-label="paginationLabel" hidden>
         <span id="pageLabel" class="page-label" aria-live="polite"></span>
         <div class="page-controls">
-          <a id="pagePrev" class="page-arrow" data-i18n-aria-label="pagePrevious" data-i18n-title="pagePrevious"><span aria-hidden="true">←</span></a>
+          <a id="pagePrev" class="page-arrow" data-i18n-aria-label="pagePrevious" data-i18n-title="pagePrevious"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a>
           <div id="pageNumbers" class="page-numbers"></div>
-          <a id="pageNext" class="page-arrow" data-i18n-aria-label="pageNext" data-i18n-title="pageNext"><span aria-hidden="true">→</span></a>
+          <a id="pageNext" class="page-arrow" data-i18n-aria-label="pageNext" data-i18n-title="pageNext"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></a>
         </div>
       </nav>
     </section>
@@ -134,11 +165,13 @@
           <small class="theme-english" id="themeEnglish" lang="en" hidden></small>
           <p id="themeDescription" class="theme-description">选择一套主题，发现光标的每一种状态。</p>
           <div class="theme-spec"><span id="themeVersion" class="badge" hidden></span><span id="themeMeta" class="theme-meta"></span></div>
+          <div id="themeTags" class="tag-list" role="group" data-i18n-aria-label="themeTags" hidden></div>
         </div>
         <div class="theme-actions">
-          <button id="favoriteTheme" class="button" type="button" aria-pressed="false">☆ 收藏</button>
-          <button id="compareToggle" class="button" type="button"><span data-i18n="compareTheme">对比主题</span> <span aria-hidden="true">⇄</span></button>
-          <a id="downloadTheme" class="button button-primary" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span> <span aria-hidden="true">↓</span></a>
+          <button id="tryTheme" class="button button-primary theme-try" type="button" aria-controls="playgroundPanel"><span data-i18n="enterPlayground">进入试用区</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></button>
+          <button id="favoriteTheme" class="icon-button" type="button" aria-pressed="false" data-i18n-aria-label="favorite" data-i18n-title="favorite"><svg class="control-icon favorite-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9Z"/></svg></button>
+          <button id="compareToggle" class="button" type="button" aria-pressed="false" aria-controls="comparePanel"><span data-i18n="compareTheme">对比主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></button>
+          <a id="downloadTheme" class="button" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
         </div>
       </header>
 
@@ -187,12 +220,15 @@
           <div class="control-field"><label for="size" data-i18n="previewSize">预览尺寸</label><select id="size"><option value="32">32 px</option><option value="48">48 px</option><option value="64">64 px</option><option value="96" selected>96 px</option><option value="128">128 px</option></select></div>
           <div class="control-field background-field"><label for="background" data-i18n="canvasBackground">画布背景</label><div class="background-inputs"><select id="background"><option value="light" data-i18n="canvasLight">浅色</option><option value="dark" data-i18n="canvasDark">深色</option><option value="checker" data-i18n="canvasChecker">透明棋盘</option><option value="custom" data-i18n="canvasCustom">自定义</option></select><input id="customColor" type="color" value="#b7c9bb" aria-label="自定义画布颜色" data-i18n-aria-label="customColor" hidden></div></div>
           <div class="control-field"><label for="speed" data-i18n="playbackSpeed">播放速度</label><select id="speed"><option value="0.5">0.5×</option><option value="1" selected data-i18n="nativeSpeed">1× 原速</option><option value="1.5">1.5×</option><option value="2">2×</option></select></div>
-          <label class="check-control hotspot-control"><input id="showHotspot" type="checkbox"><span data-i18n="showHotspot">显示点击位置</span></label>
+          <label class="switch-control"><input id="showHotspot" type="checkbox"><span class="switch-track" aria-hidden="true"></span><span data-i18n="showHotspot">显示点击位置</span></label>
         </div>
         <div class="playback-controls">
           <div class="transport">
             <button id="stepBack" class="icon-button" type="button" aria-label="上一帧" data-i18n-aria-label="previousFrame" title="上一帧" data-i18n-title="previousFrame"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5v10m9-10-6 5 6 5Z"/></svg></button>
-            <button id="playPause" class="play-button" type="button" aria-pressed="false" aria-label="暂停动画">暂停</button>
+            <button id="playPause" class="icon-button play-button" type="button" aria-pressed="false" aria-label="暂停动画" title="暂停动画">
+              <svg class="control-icon pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14m6-14v14"/></svg>
+              <svg class="control-icon play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg>
+            </button>
             <button id="stepNext" class="icon-button" type="button" aria-label="下一帧" data-i18n-aria-label="nextFrame" title="下一帧" data-i18n-title="nextFrame"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15 5v10M6 5l6 5-6 5Z"/></svg></button>
           </div>
           <label class="sr-only" for="timeline" data-i18n="animationFrame">动画帧</label><input id="timeline" class="timeline" type="range" min="0" max="89" value="0" step="1">
@@ -201,10 +237,9 @@
       </section>
 
       <section class="pointer-bar" aria-label="网页光标设置" data-i18n-aria-label="pointerControls">
-        <label class="check-control pointer-switch"><input id="liveCursor" type="checkbox" checked><span data-i18n="liveCursor">网页试用光标</span></label>
+        <label class="switch-control pointer-switch"><input id="liveCursor" type="checkbox"><span class="switch-track" aria-hidden="true"></span><span data-i18n="liveCursor">全站试用光标</span></label>
         <div class="inline-field"><label for="cursorSize" data-i18n="cursorSize">指针大小</label><select id="cursorSize"><option value="24">24 px</option><option value="32" selected>32 px</option><option value="48">48 px</option><option value="64">64 px</option></select></div>
-        <label class="check-control"><input id="autoRole" type="checkbox" checked><span data-i18n="autoRole">自动状态</span></label>
-        <span class="pointer-hint"><span data-i18n="escapeHint">按 Esc 恢复浏览器指针</span></span>
+        <label class="switch-control"><input id="autoRole" type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span data-i18n="autoRole">自动状态</span></label>
       </section>
 
       <div class="view-nav">
@@ -218,13 +253,29 @@
 
       <section id="libraryPanel" class="view-panel" role="tabpanel" aria-labelledby="tabLibrary">
         <h2 class="sr-only" data-i18n="roleGridTitle">17 种 Windows 光标状态</h2>
+        <div class="role-filters" id="roleFilters" hidden>
+          <div class="control-field">
+            <label for="roleGroupFilter" data-i18n="roleGroupFilter">用途</label>
+            <select id="roleGroupFilter">
+              <option value="" data-i18n="allRoleGroups">全部用途</option>
+              <option value="selection" data-i18n="roleGroupSelection">选择与状态</option>
+              <option value="input" data-i18n="roleGroupInput">输入与定位</option>
+              <option value="resize" data-i18n="roleGroupResize">调整与移动</option>
+            </select>
+          </div>
+          <div class="control-field">
+            <label for="roleTagFilter" data-i18n="roleTagFilter">功能标签</label>
+            <select id="roleTagFilter"><option value="" data-i18n="allRoleTags">全部标签</option></select>
+          </div>
+          <span id="roleGridCount" class="role-grid-count" role="status"></span>
+        </div>
         <div id="roleGrid" class="role-grid"></div>
       </section>
 
       <section id="comparePanel" class="view-panel" role="tabpanel" aria-labelledby="tabCompare" hidden>
         <div class="compare-controls">
           <div class="control-field"><label for="compareA" data-i18n="compareA">主题 A</label><select id="compareA"></select></div>
-          <button id="swapCompare" class="button compare-swap" type="button" aria-label="交换两个对比主题" data-i18n-aria-label="swapCompareLabel">⇄ <span data-i18n="swapCompare">交换</span></button>
+          <button id="swapCompare" class="icon-button" type="button" data-i18n-aria-label="swapCompareLabel" data-i18n-title="swapCompareLabel"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></button>
           <div class="control-field"><label for="compareB" data-i18n="compareB">主题 B</label><select id="compareB"></select></div>
         </div>
         <p class="panel-intro" data-i18n="compareIntro">同一状态，并排看细节。两套主题各自保留原生动画节奏。</p>
@@ -232,8 +283,18 @@
       </section>
 
       <section id="playgroundPanel" class="view-panel" role="tabpanel" aria-labelledby="tabPlayground" hidden>
-        <div class="panel-heading"><div><h2 data-i18n="playgroundTitle">把光标用起来</h2><p data-i18n="playgroundIntro">移动、输入、点击，让每个状态在真实操作里出现。</p></div><span class="small-badge" data-i18n="autoRoleHint">开启自动状态更直观</span></div>
-        <div class="playground-grid">
+        <div class="panel-heading">
+          <div><h2 id="playgroundTitle" tabindex="-1" data-i18n="playgroundTitle">把光标用起来</h2><p data-i18n="playgroundIntro">移动、输入、点击，让每个状态在真实操作里出现。</p></div>
+          <button id="returnFromTrial" class="button" type="button"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5m-6 6 6-6 6 6"/></svg><span data-i18n="backToStudio">返回工作室</span></button>
+        </div>
+        <div class="trial-preview">
+          <div class="stage trial-preview-stage" aria-hidden="true"><canvas id="trialCanvas"></canvas></div>
+          <div class="trial-preview-copy">
+            <strong id="trialRoleStatus" role="status"></strong>
+            <button id="trialAuto" class="button" type="button" aria-pressed="false" data-i18n="trialAuto">随控件自动切换</button>
+          </div>
+        </div>
+        <div id="playgroundSamples" class="playground-grid">
           <article class="playground-card text-demo"><div class="demo-heading"><span class="demo-number">01</span><h3 data-i18n="textDemoTitle">写下点什么</h3><span class="demo-role" data-role-label="IBeam">文本</span></div><label class="sr-only" for="demoText" data-i18n="demoTextLabel">输入试用文本</label><textarea id="demoText" placeholder="把指针移到这里，写下今天的灵感…" data-i18n-placeholder="demoTextPlaceholder" rows="4"></textarea><button id="demoLink" class="demo-link" type="button"><span data-i18n="demoLink">试试链接指针</span> <span aria-hidden="true">↗</span></button></article>
           <article class="playground-card"><div class="demo-heading"><span class="demo-number">02</span><h3 data-i18n="responseDemoTitle">不同的回应</h3><span class="demo-role" data-i18n="disabledWaiting">禁用 / 等待</span></div><div class="response-demos"><div class="response-demo disabled-demo" data-cursor="No" aria-disabled="true"><span class="response-symbol" aria-hidden="true">⊘</span><strong data-i18n="disabledDemo">暂不可用</strong><small data-i18n="disabledHint">移入查看禁用状态</small></div><div class="response-demo waiting-demo" data-cursor="Wait"><span class="response-symbol" aria-hidden="true">◷</span><strong data-i18n="waitDemo">稍等片刻</strong><small data-i18n="waitHint">移入查看等待状态</small></div></div></article>
           <article class="playground-card"><div class="demo-heading"><span class="demo-number">03</span><h3 data-i18n="dragDemoTitle">自由移动</h3><span class="demo-role" data-i18n="dragRole">拖动</span></div><div class="drag-room"><button id="dragTarget" class="drag-target" type="button" data-cursor="SizeAll" aria-label="拖动试用方块" data-i18n-aria-label="dragLabel"><span aria-hidden="true">✥</span> <span data-i18n="dragMe">拖动我</span></button><p data-i18n="dragHint">按住方块，在这片区域里移动。</p></div></article>
@@ -249,23 +310,59 @@
       </footer>
     </section>
     <section class="install" id="install" data-view-panel="guide" aria-labelledby="installTitle" hidden>
-      <div class="section-heading">
-        <div><p class="eyebrow" data-i18n="aboutKicker">03 / 带回桌面</p>
-        <h1 id="installTitle" data-i18n="aboutTitle">从展馆到你的桌面</h1>
-        <p data-i18n="aboutDescription">下载主题 ZIP 并完整解压。打开解压后的文件夹，让 Animated 和 Static 子文件夹与安装文件留在同一目录。</p></div>
-        <span class="badge" data-i18n="windowsBadge">Windows 7 / 10 / 11</span>
+      <nav id="guideBreadcrumb" class="guide-breadcrumb" data-i18n-aria-label="guideBreadcrumb">
+        <a id="blogReturn" data-blog-url="https://vjangel.github.io/" data-site-back hidden><span data-i18n="blogReturn">返回个人博客</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        <a href="./index.html"><span data-i18n="brand">光标展馆</span></a>
+        <span aria-current="page" data-i18n="navAbout">安装指南</span>
+      </nav>
+      <header class="guide-hero">
+        <div class="guide-heading">
+          <span class="badge" data-i18n="windowsBadge">Windows 7 / 10 / 11</span>
+          <h1 id="installTitle" data-i18n="aboutTitle">从展馆到你的桌面</h1>
+          <a class="button button-primary" href="./index.html?view=collection"><span data-i18n="guideChoose">前往馆藏选择主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+        </div>
+        <div class="guide-package">
+          <h2 data-i18n="nativeFiles">ZIP 内的文件</h2>
+          <ul>
+            <li><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><code>Animated/</code></li>
+            <li><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><code>Static/</code></li>
+            <li class="guide-setup-file"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM7 10l2 2-2 2m5 0h4"/></svg><code>Install.cmd</code></li>
+          </ul>
+          <img class="guide-cursor" id="guideCursor" width="96" height="96" alt="" hidden>
+        </div>
+      </header>
+      <div class="guide-content">
+        <ol class="guide-steps">
+          <li><div>
+            <h2 data-i18n="guideExtractTitle">下载并解压</h2>
+            <p data-i18n="aboutDescription">下载主题 ZIP 并完整解压。打开解压后的文件夹，让 Animated 和 Static 子文件夹与安装文件留在同一目录。</p>
+          </div></li>
+          <li><div>
+            <h2 data-i18n="installScriptTitle">用脚本安装并应用</h2>
+            <p data-i18n="installScript">在解压后的文件夹里双击 Install.cmd。它会为当前 Windows 用户注册动态和静态两种方案，并立即应用动态方案。</p>
+          </div></li>
+          <li id="installSwitchStep"><div>
+            <h2 id="installSwitchHeading" data-i18n="installSwitchTitle">应用或切换方案</h2>
+            <p data-i18n="installSwitch">按 Win + R，输入 main.cpl 后回车。在「鼠标属性」中打开「指针」选项卡，在「方案」下拉框中选择对应的主题和版本。带 (Animated) 的是动态方案，带 (Static) 的是静态方案。选好后点「应用」或「确定」。</p>
+          </div></li>
+        </ol>
+        <aside class="guide-reference" aria-labelledby="guideReferenceHeading">
+          <h2 id="guideReferenceHeading" data-i18n="guideReference">其他操作</h2>
+          <details id="installInfDetails">
+            <summary><span data-i18n="installInfTitle">通过 INF 安装</span></summary>
+            <p data-i18n="installInf">右键单击 Install.inf。Windows 7 或 10 直接选择「安装」。Windows 11 如需展开旧版菜单，先选「显示更多选项」，再选「安装」。这会注册两种方案，安装后需手动应用。</p>
+            <a href="#installSwitchStep" data-i18n="installSwitchTitle">应用或切换方案</a>
+          </details>
+          <details id="uninstallDetails">
+            <summary><span data-i18n="uninstallTitle">卸载主题</span></summary>
+            <p data-i18n="uninstall">要卸载哪个版本，就在该版本解压后的文件夹里运行 Uninstall.cmd。</p>
+          </details>
+          <div class="guide-compatibility">
+            <h3 data-i18n="guideCompatibility">Windows 兼容性</h3>
+            <p data-i18n="windowsSupport">每个 ZIP 含 17 种角色。Windows 7 的「指针」选项卡只列出 15 个经典角色。支持扩展角色的 Windows 10 和 11 版本还会显示「位置选择」(Location Select) 和「人员选择」(Person Select)。</p>
+          </div>
+        </aside>
       </div>
-      <div class="install-grid">
-        <article><span class="step-number" aria-hidden="true">A</span><h2 data-i18n="installScriptTitle">用脚本安装并应用</h2><p data-i18n="installScript">在解压后的文件夹里双击 Install.cmd。它会为当前 Windows 用户注册动态和静态两种方案，并立即应用动态方案。</p></article>
-        <article><span class="step-number" aria-hidden="true">B</span><h2 data-i18n="installInfTitle">通过 INF 安装</h2><p data-i18n="installInf">右键单击 Install.inf。Windows 7 或 10 直接选择「安装」。Windows 11 如需展开旧版菜单，先选「显示更多选项」，再选「安装」。这会注册两种方案，安装后按下方步骤选择并应用。</p></article>
-        <article><span class="step-number" aria-hidden="true">↶</span><h2 data-i18n="uninstallTitle">卸载主题</h2><p data-i18n="uninstall">要卸载哪个版本，就在该版本解压后的文件夹里运行 Uninstall.cmd。</p></article>
-      </div>
-      <section class="compatibility" aria-labelledby="installSwitchHeading">
-        <h2 id="installSwitchHeading" data-i18n="installSwitchTitle">在 Windows 7、10、11 应用或切换方案</h2>
-        <p data-i18n="installSwitch">按 Win + R，输入 main.cpl 后回车。在「鼠标属性」中打开「指针」选项卡，在「方案」下拉框中选择对应的主题和版本。带 (Animated) 的是动态方案，带 (Static) 的是静态方案。选好后点「应用」或「确定」。</p>
-      </section>
-      <p class="compatibility" data-i18n="windowsSupport">每个 ZIP 含 17 种角色。Windows 7 的「指针」选项卡只列出 15 个经典角色。支持扩展角色的 Windows 10 和 11 版本还会显示「位置选择」(Location Select) 和「人员选择」(Person Select)。</p>
-      <a class="button" href="./index.html?view=collection"><span data-i18n="aboutBrowse">返回收藏馆</span><span aria-hidden="true">→</span></a>
     </section>
     <p id="loadStatus" class="gallery-error" role="status" hidden></p>
     <footer class="site-footer">
@@ -276,10 +373,11 @@
     <noscript><p class="noscript-message" data-i18n="noscript">启用 JavaScript 后可加载主题与动画。</p></noscript>
   </main>
   <dialog id="roleDialog" class="role-dialog" aria-labelledby="detailName" aria-describedby="detailInfo">
-    <div class="dialog-heading"><p class="eyebrow" data-i18n="detailTitle">光标细节</p><button id="closeDialog" class="icon-button" type="button" data-i18n-aria-label="closeDialog">×</button></div>
+    <div class="dialog-heading"><p class="eyebrow" data-i18n="detailTitle">光标细节</p><button id="closeDialog" class="icon-button" type="button" data-i18n-aria-label="closeDialog" data-i18n-title="closeDialog"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <h2 id="detailName"></h2>
     <div class="stage detail-stage"><canvas id="detailCanvas" data-i18n-aria-label="detailPreview"></canvas></div>
     <p id="detailInfo" class="detail-info"></p>
+    <div id="detailTags" class="tag-list" role="group" data-i18n-aria-label="detailTags" hidden></div>
     <div class="native-files">
       <h3 data-i18n="nativeFiles">ZIP 内的文件</h3>
       <dl>
@@ -287,9 +385,22 @@
         <div id="detailStatic"><dt data-i18n="kindStatic">静态</dt><dd id="staticFilename"></dd></div>
       </dl>
     </div>
-    <div class="detail-downloads"><a id="downloadDetail" class="button button-primary" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span><span aria-hidden="true">↓</span></a></div>
+    <div class="detail-downloads">
+      <button id="tryDetail" class="button button-primary" type="button" aria-controls="playgroundPanel"><span id="tryDetailLabel" data-i18n="enterPlayground">进入试用区</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></button>
+      <a id="downloadDetail" class="button" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
+    </div>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="siteTrialBar" class="site-trial-bar" hidden>
+    <div class="site-trial-copy">
+      <strong id="siteTrialTitle">全站试用中</strong>
+      <span id="siteTrialStatus" role="status" aria-live="polite"></span>
+    </div>
+    <button id="stopSiteTrial" class="button" type="button" aria-describedby="siteTrialStatus" aria-keyshortcuts="Escape">
+      <span data-i18n="homeStopTrial">结束试用</span>
+    </button>
+  </div>
   <canvas id="livePointer" aria-hidden="true" hidden></canvas>
+  <div id="cursorBursts" aria-hidden="true"></div>
 </body>
 </html>
