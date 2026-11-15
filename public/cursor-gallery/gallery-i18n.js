@@ -35,6 +35,7 @@ navStudio|Studio|工作室|工作室|스튜디오|スタジオ|Студия
 navAbout|Install guide|安装指南|安裝指南|설치 안내|インストールガイド|Установка
 language|Language|语言|語言|언어|言語|Язык
 appearance|Appearance|外观|外觀|화면 모드|外観|Оформление
+clickEffects|Click effects|点击效果|點擊效果|클릭 효과|クリック効果|Эффекты нажатия
 appearanceAuto|Automatic|自动|自動|자동|自動|Автоматически
 languageSystem|Follow system|跟随系统|跟隨系統|시스템 설정 따르기|システムに合わせる|Как в системе
 appearanceLight|Light|浅色|淺色|밝게|ライト|Светлое
@@ -87,6 +88,7 @@ aboutDescription|Download the theme ZIP and extract it completely. Open the extr
 guideBreadcrumb|Guide location|指南导航|指南導覽|안내 경로|ガイドの現在地|Раздел руководства
 blogReturn|Back to the blog|返回个人博客|返回個人部落格|개인 블로그로 돌아가기|個人ブログに戻る|Вернуться в блог
 guideChoose|Choose a theme from the collection|前往馆藏选择主题|前往館藏選擇主題|컬렉션에서 테마 선택|コレクションからテーマを選ぶ|Выбрать тему из коллекции
+guideThemeReturn|Back to theme|返回主题|返回主題|테마로 돌아가기|テーマに戻る|Вернуться к теме
 guideExtractTitle|Download and extract|下载并解压|下載並解壓縮|다운로드 후 압축 풀기|ダウンロードして展開|Скачайте и распакуйте
 guideReference|Other actions|其他操作|其他操作|기타 작업|その他の操作|Другие действия
 guideCompatibility|Windows compatibility|Windows 兼容性|Windows 相容性|Windows 호환성|Windows の互換性|Совместимость с Windows
@@ -106,6 +108,7 @@ timing|{count} roles · {role} · {seconds}s cycle · {frames} frames|{count} �
 detailHotspot|Hotspot at {x}, {y} on a 128 px canvas. The ANI retains its native timing and hotspot.|在 128 像素画布上，点击热点为 {x}, {y}。ANI 保留原生时序和热点。|在 128 像素畫布上，點擊熱點為 {x}, {y}。ANI 保留原有節奏與熱點。|128px 캔버스의 핫스폿은 {x}, {y}입니다. ANI는 원래 재생 타이밍과 핫스폿을 유지합니다.|128 px のキャンバス上でのホットスポットは {x}, {y} です。ANI には元の再生タイミングとホットスポットが保持されます。|Точка нажатия на холсте 128 пкс: {x}, {y}. В ANI сохранены исходная длительность кадров и точка нажатия.
 nativeFiles|Files in the ZIP|ZIP 内的文件|ZIP 內的檔案|ZIP에 포함된 파일|ZIP 内のファイル|Файлы в ZIP
 packageDownload|Download theme ZIP|下载主题 ZIP|下載主題 ZIP|테마 ZIP 다운로드|テーマ ZIP をダウンロード|Скачать ZIP с темой
+installTheme|Install this theme|安装这套主题|安裝這套主題|이 테마 설치|このテーマをインストール|Установить эту тему
 pointerActive|Web pointer · {role}|网页指针 · {role}|網頁游標 · {role}|웹 포인터 · {role}|ウェブポインター · {role}|Веб-указатель · {role}
 pointerTouch|Touch mode|触屏模式|觸控模式|터치 모드|タッチモード|Сенсорный режим
 pointerNative|Browser pointer|浏览器指针|瀏覽器游標|브라우저 포인터|ブラウザーのポインター|Указатель браузера

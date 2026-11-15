@@ -32,6 +32,10 @@
   function canonicalThemeId(id){return legacyThemeIds.get(id)||id;}
   function galleryRoute(search,themes){
     const params=new URLSearchParams(search),view=params.get('view');
+    if(view==='guide'){
+      const themeId=canonicalThemeId(params.get('theme'));
+      return themeId&&themes.some(theme=>theme.id===themeId)?{view:'guide',themeId}:{view:'guide'};
+    }
     if(params.has('theme')){
       const themeId=canonicalThemeId(params.get('theme'));
       const theme=themes.find(theme=>theme.id===themeId);
@@ -39,8 +43,7 @@
         const tryRole=params.get('try');
         return tryRole&&Object.hasOwn(theme.roles||{},tryRole)?{view:'theme',themeId,tryRole}:{view:'theme',themeId};
       }
-    }else if(view==='guide')return{view:'guide'};
-    else if(view!=='collection')return{view:'home'};
+    }else if(view!=='collection')return{view:'home'};
     const page=Number(params.get('page'));
     const category=params.get('category');
     const route={view:'collection',page:Number.isSafeInteger(page)&&page>0?page:1,
@@ -58,7 +61,10 @@
       params.set('theme',options.themeId);
       if(options.tryRole)params.set('try',options.tryRole);
     }
-    else if(view==='guide')params.set('view',view);
+    else if(view==='guide'){
+      params.set('view',view);
+      if(options.themeId)params.set('theme',options.themeId);
+    }
     else if(view==='collection'){
       params.set('view',view);
       if(options.page>1)params.set('page',options.page);

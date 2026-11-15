@@ -12,7 +12,7 @@
       const params = new URLSearchParams(location.search);
       const view = params.get('view');
       const legacy = location.search ? '' : ({'#collection':'collection','#studio':'theme','#install':'guide'}[location.hash] || '');
-      root.dataset.view = params.has('theme') ? 'theme' : legacy || (['collection','guide'].includes(view) ? view : 'home');
+      root.dataset.view = view === 'guide' ? 'guide' : params.has('theme') ? 'theme' : legacy || (view === 'collection' ? view : 'home');
       try {
         const appearance = JSON.parse(localStorage.getItem('cursor-gallery-v1') || '{}')?.appearance;
         if (['auto','light','dark','theme'].includes(appearance)) root.dataset.appearance = appearance;
@@ -101,6 +101,11 @@
               <svg class="stage-fullscreen-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5"/></svg>
               <svg class="stage-fullscreen-exit-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4m16 0h-5V4m0 16v-5h5m-16 0h5v5"/></svg>
             </button>
+            <label class="switch-control stage-click-effects">
+              <input id="cursorBurstsEnabled" type="checkbox" checked>
+              <span class="switch-track" aria-hidden="true"></span>
+              <span data-i18n="clickEffects">点击效果</span>
+            </label>
           </div>
         </div>
         <div id="homeRoleOptions" class="stage-roles" role="group" data-i18n-aria-label="homeRoles"></div>
@@ -172,6 +177,7 @@
           <button id="favoriteTheme" class="icon-button" type="button" aria-pressed="false" data-i18n-aria-label="favorite" data-i18n-title="favorite"><svg class="control-icon favorite-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9Z"/></svg></button>
           <button id="compareToggle" class="button" type="button" aria-pressed="false" aria-controls="comparePanel"><span data-i18n="compareTheme">对比主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></button>
           <a id="downloadTheme" class="button" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
+          <a id="installTheme" class="theme-install-link" hidden><span data-i18n="installTheme">安装这套主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></a>
         </div>
       </header>
 
@@ -273,6 +279,7 @@
       </section>
 
       <section id="comparePanel" class="view-panel" role="tabpanel" aria-labelledby="tabCompare" hidden>
+        <h2 id="compareTitle" tabindex="-1" data-i18n="compareTheme">对比主题</h2>
         <div class="compare-controls">
           <div class="control-field"><label for="compareA" data-i18n="compareA">主题 A</label><select id="compareA"></select></div>
           <button id="swapCompare" class="icon-button" type="button" data-i18n-aria-label="swapCompareLabel" data-i18n-title="swapCompareLabel"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></button>
@@ -319,7 +326,16 @@
         <div class="guide-heading">
           <span class="badge" data-i18n="windowsBadge">Windows 7 / 10 / 11</span>
           <h1 id="installTitle" data-i18n="aboutTitle">从展馆到你的桌面</h1>
-          <a class="button button-primary" href="./index.html?view=collection"><span data-i18n="guideChoose">前往馆藏选择主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+          <a id="guideChooseTheme" class="button button-primary" href="./index.html?view=collection"><span data-i18n="guideChoose">前往馆藏选择主题</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+          <div id="guideThemeSelection" class="guide-theme-selection" hidden>
+            <div class="guide-theme-meta">
+              <h2 id="guideThemeName"></h2><span id="guideThemeVersion" class="badge" hidden></span>
+            </div>
+            <div class="guide-theme-actions">
+              <a id="guideDownload" class="button button-primary" download hidden><span data-i18n="packageDownload">下载主题 ZIP</span><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
+              <a id="guideThemeReturn" class="button"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg><span data-i18n="guideThemeReturn">返回主题</span></a>
+            </div>
+          </div>
         </div>
         <div class="guide-package">
           <h2 data-i18n="nativeFiles">ZIP 内的文件</h2>
