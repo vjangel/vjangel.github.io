@@ -8,7 +8,7 @@
     for(let i=0;i<durations.length;i++){if(t<durations[i]-1e-8)return i;t-=durations[i];}
     return 0;
   }
-  function cursorPosition(x,y,hotspot,size){return{left:x-hotspot[0]*size/128,top:y-hotspot[1]*size/128};}
+  function cursorPosition(x,y,hotspot,size,frameSize=128){return{left:x-hotspot[0]*size/frameSize,top:y-hotspot[1]*size/frameSize};}
   function roleTiming(theme,role){return theme.roles?.[role]?.durationsMs?.length?theme.roles[role]:theme;}
   function roleLayout(theme,role){return theme.roles?.[role]?.atlasLayout||theme.atlas;}
   const facetNames=['style','subject'];

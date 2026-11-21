@@ -171,6 +171,7 @@
     const featured=guideTheme?.thumbnail?guideTheme:themes.find(theme=>theme.id==='neon-flux'&&theme.thumbnail)||themes.find(theme=>theme.thumbnail);
     if(featured){
       guideCursor.src=featured.thumbnail;
+      guideCursor.classList.toggle('pixel-art',featured.pixelArt);
       guideCursor.hidden=false;
     }
     if(guideTheme){
@@ -407,21 +408,25 @@
   }
   function prepareTheme(theme){return Promise.all(roles.map(r=>imageFor(roleInfo(theme,r.id).atlas).promise));}
 
+  function canvasPixels(size){return Math.round(size*Math.min(devicePixelRatio||1,2));}
   function prepareCanvas(canvas,size){
-    const dpr=Math.min(devicePixelRatio||1,2),n=Math.round(size*dpr);
+    const n=canvasPixels(size),dpr=n/size;
     if(canvas.width!==n||canvas.height!==n){canvas.width=n;canvas.height=n;canvas.style.width=size+'px';canvas.style.height=size+'px';}
     const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,size,size);
     return ctx;
   }
-  function paintCells(canvas,image,size,frame,fs,columns,pixelArt){
+  function paintCells(canvas,image,size,frame,fs,columns,pixelArt,top=0){
     const ctx=prepareCanvas(canvas,size);ctx.imageSmoothingEnabled=!pixelArt;
-    ctx.drawImage(image,frame%columns*fs,Math.floor(frame/columns)*fs,fs,fs,0,0,size,size);
+    ctx.imageSmoothingQuality='high';
+    canvas.classList.toggle('pixel-art',pixelArt);
+    ctx.drawImage(image,frame%columns*fs,top+Math.floor(frame/columns)*fs,fs,fs,0,0,size,size);
     return ctx;
   }
   function paintAtlas(canvas,image,theme,role,size,frame,hotspot){
-    const a=core.roleLayout(theme,role),fs=a.frameSize||128,columns=a.columns||10;
-    const ctx=paintCells(canvas,image,size,frame,fs,columns,theme.pixelArt);
-    if(hotspot){const p=roleInfo(theme,role).hotspot;const x=p[0]*size/128,y=p[1]*size/128;ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.strokeStyle='#d64939';ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x+6,y);ctx.moveTo(x,y-6);ctx.lineTo(x,y+6);ctx.stroke();}
+    const info=roleInfo(theme,role),grid=info.nativeGrids?.[canvasPixels(size)]||core.roleLayout(theme,role);
+    const fs=grid.frameSize||128,columns=grid.columns||10;
+    const ctx=paintCells(canvas,image,size,frame,fs,columns,theme.pixelArt,grid.top);
+    if(hotspot){const p=grid.hotspot||info.hotspot;const x=p[0]*size/fs,y=p[1]*size/fs;ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.strokeStyle='#d64939';ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x+6,y);ctx.moveTo(x,y-6);ctx.lineTo(x,y+6);ctx.stroke();}
   }
   function draw(canvas,theme,role,size,frame,hotspot=state.showHotspot){
     const record=imageFor(roleInfo(theme,role).atlas);if(!record.loaded||record.error)return false;
@@ -437,6 +442,7 @@
     sample.style.setProperty('--item-color',theme.accent||'#7855ff');
     if(theme.thumbnail){
       const img=el('img','theme-thumb');img.src=theme.thumbnail;img.alt='';img.width=92;img.height=92;
+      img.classList.toggle('pixel-art',theme.pixelArt);
       img.decoding='async';sample.append(img);
     }
     if(saved)sample.append(el('span','theme-star','★'));
@@ -505,6 +511,7 @@
       button.dataset.themeId=theme.id;button.title=name;button.setAttribute('aria-label',name);
       button.style.setProperty('--item-color',theme.accent||'#7855ff');
       const thumb=el('img');thumb.src=theme.thumbnail;thumb.alt='';thumb.width=48;thumb.height=48;
+      thumb.classList.toggle('pixel-art',theme.pixelArt);
       const tile=el('span','stage-dock-item');tile.append(thumb);
       button.append(tile);button.onclick=()=>chooseHome(index,home.role);
       return button;
@@ -1016,7 +1023,8 @@
     if(!siteTrial||!pointer.inside||!finePointer()||document.visibilityState!=='visible'||!document.hasFocus()){hidePointer(false);return;}
     const t=byId.get(siteTrial.themeId),role=liveRole(),info=roleInfo(t,role),record=imageFor(info.atlas);
     if(!record.loaded||record.error){hidePointer(false);return;}
-    const size=state.cursorSize,p=core.cursorPosition(pointer.x,pointer.y,info.hotspot,size);
+    const size=state.cursorSize,grid=info.nativeGrids?.[canvasPixels(size)];
+    const p=core.cursorPosition(pointer.x,pointer.y,grid?.hotspot||info.hotspot,size,grid?.frameSize);
     const elapsed=view==='theme'&&t===current()?state.elapsedMs
       :view==='home'&&t===homeTheme()?home.elapsed
       :state.playing?(performance.now()-trialStart)*state.speed:0;
